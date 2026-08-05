@@ -9,11 +9,13 @@ flowchart LR
     USER["User"] --> INTERFACE["Product interface<br/>Telegram · Workspace · CLI"]
     INTERFACE --> OPENCLAW["OpenClaw<br/>conversation · orchestration · execution"]
 
-    OPENCLAW <-->|"select model"| ROUTER["AI Decision Engine"]
+    OPENCLAW -->|"routing request"| ROUTER["AI Decision Engine"]
+    ROUTER -.->|"selects route"| MODELS["Local or approved<br/>cloud models"]
+    ROUTER -->|"routing decision"| OPENCLAW
     OPENCLAW <-->|"retrieve or act"| CAPABILITIES["Tools and memory"]
-    OPENCLAW --> MODELS["Local or approved<br/>cloud models"]
+    OPENCLAW -->|"executes route"| MODELS
 
-    MODELS --> OPENCLAW
+    MODELS -->|"response"| OPENCLAW
     OPENCLAW --> INTERFACE
     INTERFACE --> USER
 ```

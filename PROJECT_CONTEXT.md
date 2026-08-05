@@ -47,7 +47,7 @@ OpenClaw is the intended platform control plane for conversations, sessions, pro
 
 ### Telegram AI Assistant
 
-Telegram AI Assistant is the current priority and the planned mobile interface to the wider AI Lab. Telegram should authenticate users, carry messages, and render responses. It must not contain model-routing policy, provider credentials, or duplicated orchestration logic.
+Telegram AI Assistant is the next active product workstream and the planned mobile interface to the wider AI Lab. It is one exploration within the Lab, not the Lab's overall purpose. Telegram should authenticate users, carry messages, and render responses. It must not contain model-routing policy, provider credentials, or duplicated orchestration logic.
 
 ### AI Decision Engine
 
@@ -87,6 +87,8 @@ Each substantial product has a separate repository with its own code, tests, arc
 - **In progress:** AI Lab portfolio documentation and Telegram AI Assistant discovery and architecture.
 - **Blocked:** No workstream is formally blocked. Telegram implementation awaits deliberate decisions about channel integration, router transport, tool ownership, memory policy, and ingress.
 - **Next:** Create the clean Telegram Assistant repository, finalize contracts, and validate a secure local-model chat path before expanding capabilities.
+
+The active roadmap describes delivery sequence. The broader focus of the Lab is to explore where AI can improve different facets of life, increase everyday efficiency, and turn ideas into useful outcomes.
 
 The detailed status tracker is maintained in [`docs/roadmap.md`](docs/roadmap.md).
 
