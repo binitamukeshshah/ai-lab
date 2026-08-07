@@ -37,4 +37,5 @@
 - Put ecosystem-wide decisions in `docs/decisions/` and product-specific decisions in the relevant product repository.
 - Update the master roadmap when a workstream changes status.
 - Update `PROJECT_CONTEXT.md` only when the Lab's source-of-truth context changes.
+- After every meaningful completed milestone, review and update the documentation that the shipped state affects: the owning product repository's documentation; `docs/roadmap.md` when status or priorities change; `PROJECT_CONTEXT.md` only for durable architecture or project-context changes; and `docs/projects/README.md` when repository or project information changes. The milestone is not fully documented until the relevant changes are reflected in GitHub.
 - Verify links, headings, status language, and diagrams before handoff.
