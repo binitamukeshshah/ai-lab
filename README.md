@@ -1,102 +1,132 @@
 # Binita AI Lab
 
-### **AI Product Leader | Building and evaluating AI-native systems hands-on**
+### **AI Product Leader | Building AI-native systems hands-on**
 
-I design, build, and evaluate working AI products to understand what it takes to make them useful, reliable, and ready to scale.
+I have spent more than a decade building and leading products, including AI and ML systems at Google and Yelp that operate at significant scale. This Lab is where I go deeper hands-on: designing, building, instrumenting, and evaluating AI-native systems myself so that my product judgment is grounded in how the technology actually behaves.
 
-This lab is where I test product hypotheses through working systems: how agents use context and tools, how models are selected and orchestrated, how AI maintains state and memory, how actions are verified, and where humans should remain in control.
+I am particularly interested in what changes when AI moves beyond conversation and becomes part of the operating system of a product: when models can reason over context, use tools, maintain state, retrieve knowledge, take actions, and collaborate with people inside explicit boundaries.
 
-Each project moves from **product question → working system → evaluation → failure analysis → product decision**.
+**I don't just use AI to accelerate existing workflows. I redesign products and workflows around what becomes possible when AI can reason over context, use tools, maintain state, and collaborate with humans.**
 
-The goal isn't to build demos. It's to develop evidence about what actually works.
+This repository is the public product and architecture layer for that work.
 
-## What Binita AI Lab is
+## What I am exploring
 
-Binita AI Lab is the product and architecture layer for a growing set of AI-native systems I build end to end. Each project starts with a concrete product question and turns it into a working system that can be tested against real constraints.
+The Lab is intentionally broader than a single application or model. I use working products and focused experiments to investigate the product questions behind modern AI systems:
 
-Across the Lab, I explore recurring AI product problems: model selection and orchestration, agent and tool behavior, context and state, privacy and cost, reliability, evaluation, and human control. The projects are intentionally connected so that capabilities and lessons from one system can inform the next.
+- **Agents & orchestration** — when an agent should reason, delegate, invoke a workflow, or stop and ask for human judgment
+- **Context engineering** — what information a system needs, when it needs it, and how to keep context useful rather than merely large
+- **Tools & MCP** — how models should discover and use external capabilities, and where deterministic software should take over
+- **Memory & state** — what should persist across interactions, what should not, and how users retain control
+- **Retrieval & RAG** — when retrieval improves an experience, how provenance should work, and when simpler context is enough
+- **Model routing & economics** — how to choose among local and cloud models based on capability, privacy, readiness, latency, and cost
+- **Evaluation & observability** — how to measure behavior, identify failure modes, and distinguish a convincing demo from a dependable product
+- **Human oversight & AI safety** — where approval, verification, guardrails, and explicit authority boundaries belong
+- **AI-native workflows** — how work itself changes when AI can move from understanding intent to using tools and producing verifiable outcomes
 
-The Lab documents more than what was built. It captures the **hypotheses, architecture, product decisions, tradeoffs, failure modes, evaluation evidence, and boundaries** behind each system.
+The point is not to collect technologies. It is to understand the product decisions each capability creates.
 
-The result is not a collection of AI demos. It is a working portfolio of AI product decisions made concrete through software.
+## Flagship systems
+
+These are the most complete systems in the Lab today. They examine different layers of the same question: **what does it take for AI to do useful work reliably, not merely generate a response?**
+
+| System | Product question | AI product depth |
+|---|---|---|
+| [AI Decision Engine](https://github.com/binitamukeshshah/ai-decision-engine) | **How should an AI system choose which intelligence to use?** | Model routing across capability, privacy, readiness, quota, cost, and local/cloud execution |
+| [Telegram Assistant](https://github.com/binitamukeshshah/telegram-assistant) | **How should an AI system reliably interact with a person and take action?** | Agentic interaction, tools, deterministic state changes, durable capture, local-first execution, and honest failure handling |
+| [Project OS](https://github.com/binitamukeshshah/project-os) | **How should an AI system maintain context and control across ongoing work?** | Persistent state, provenance, project context, approval boundaries, capability control, and human oversight |
+
+Together, they explore a progression from **choosing intelligence → acting reliably → maintaining context over time**.
+
+## Experiments & supporting systems
+
+Not every useful question needs to become a flagship product. Smaller systems let me isolate a capability, test an assumption, or build infrastructure that supports the wider Lab.
+
+| Project | Question / purpose | Status |
+|---|---|---|
+| [Forge](https://github.com/binitamukeshshah/forge) | Can an AI development companion reduce the friction between product intent and a structured, working artifact? | Prototype complete; intentionally paused |
+| **AI Lab CLI** | What lightweight operator experience is useful across the Lab? | Early exploration |
+| **Evaluation harnesses** | How should I compare model, routing, agent, and workflow behavior systematically rather than relying on anecdotal success? | Expanding across projects |
+| **Future experiments** | Focused builds around retrieval, memory, tool use, agent coordination, observability, and AI-native workflows | Added as hypotheses warrant |
+
+The portfolio will grow, but breadth is not the goal. A new project earns a place here when it helps answer a meaningful AI product question.
+
+## From product question to evidence
+
+I build because implementation exposes product questions that architecture diagrams and strategy documents can hide.
+
+My working loop is:
+
+**Product question → hypothesis → architecture → working system → evaluation → failure analysis → product decision → iteration**
+
+For each system, I want the evidence to answer more than *does it run?*:
+
+- Does it complete the intended task reliably?
+- Where does it fail, and are those failures detectable?
+- Which decisions belong to the model versus deterministic software?
+- What happens when tools, providers, or dependencies are unavailable?
+- What quality threshold is good enough for the use case?
+- What are the latency, privacy, and cost tradeoffs?
+- When should a human review, approve, or override the system?
+- What did the evidence cause me to change?
+
+That last question matters most. **Evaluation is useful when it changes a product decision.**
 
 ## How the system fits together
 
 ```mermaid
 flowchart LR
-    INTERFACES["Product interfaces"] --> OPENCLAW["OpenClaw"]
-    OPENCLAW -->|"routing request"| ROUTER["AI Decision Engine"]
-    ROUTER -.->|"selects route"| MODELS["Local or cloud models"]
-    ROUTER -->|"routing decision"| OPENCLAW
-    OPENCLAW -->|"executes route"| MODELS
-    MODELS -->|"response"| OPENCLAW
-    OPENCLAW --> CAPABILITIES["Tools and memory"]
+    USER["User / Product Experience"] --> INTERFACES["Product Interfaces"]
+    INTERFACES --> OPENCLAW["Agent & Tool Orchestration"]
+    OPENCLAW --> ROUTER["AI Decision Engine"]
+    ROUTER --> MODELS["Local + Cloud Models"]
+    OPENCLAW --> CAPABILITIES["Tools / MCP"]
+    OPENCLAW --> CONTEXT["Context / Memory / State"]
+    MODELS --> OPENCLAW
+    CAPABILITIES --> OPENCLAW
+    CONTEXT --> OPENCLAW
+    OPENCLAW --> VERIFY["Deterministic Verification + Human Control"]
+    VERIFY --> USER
 ```
 
-- **Product interfaces** make the system accessible without owning model policy.
-- **OpenClaw** manages conversations, authentication, orchestration, memory access, tools, and execution.
-- **AI Decision Engine** selects the local or cloud route using privacy, capability, readiness, quota, and cost constraints; it does not execute the model.
-- **Models, tools, and memory** remain replaceable behind explicit boundaries.
+The architecture is deliberately modular. Product interfaces should not own model policy. Models should not be treated as proof that an action occurred. Tools and memory need explicit authority boundaries. Model providers should remain replaceable where practical.
 
-The full design—including request flow, repository ownership, and deployment principles—is documented in the [AI Lab architecture](docs/architecture.md).
+The [AI Lab architecture](docs/architecture.md) documents request flow, system boundaries, and deployment principles in more detail.
 
-## What I am building
+## How I build
 
-The Lab currently centers on three systems that test different layers of the same product problem: **how to make AI useful when it must do more than generate a response.**
+I use AI extensively in implementation, but I do not treat generated code or model output as evidence that a product decision is correct. I own the product question, architecture, scope, acceptance criteria, tradeoffs, and evaluation.
 
-| System | Product question | What it demonstrates |
-|---|---|---|
-| [AI Decision Engine](https://github.com/binitamukeshshah/ai-decision-engine) | How should an AI system choose which intelligence to use? | Model selection and routing across privacy, capability, readiness, quota, and cost constraints |
-| [Telegram Assistant](https://github.com/binitamukeshshah/telegram-assistant) | How should an AI system reliably interact with a person and take action? | Agentic interaction, tool use, deterministic state changes, local-first execution, and honest failure handling |
-| [Project OS](https://github.com/binitamukeshshah/project-os) | How should an AI system maintain context and control across ongoing work? | Persistent state, provenance, project context, approval boundaries, and human control |
+My current environment spans:
 
-Together, they explore a progression from **choosing intelligence → acting reliably → maintaining context over time**.
-
-[Forge](https://github.com/binitamukeshshah/forge) is a supporting prototype focused on developer experience: reducing the friction between product intent and a structured, working AI project. Its development is intentionally paused while I prioritize the three systems above.
-
-Each system has an explicit product question, architecture, responsibility boundaries, tests, limitations, and roadmap. As the Lab matures, I am adding stronger evaluation evidence so product decisions can be grounded not only in whether a system works, but **how well it works, where it fails, what it costs, and when a different design is warranted**.
-
-## How I work
-
-My learning loop is intentionally product-led:
-
-1. Start with a problem I experience or can observe clearly.
-2. Frame the product question and identify the riskiest assumption.
-3. Design the smallest credible system that can test it.
-4. Build enough of the product to create real evidence.
-5. Evaluate behavior, failures, privacy, cost, and user value.
-6. Document what worked, what did not, and what should happen next.
-
-I use AI to accelerate implementation, but I do not outsource product judgment to it. Architecture, scope, tradeoffs, acceptance criteria, and evidence still require deliberate choices. The purpose of building is not merely to produce code; it is to make those choices concrete enough to examine.
-
-## Development environment
-
-| Environment | Responsibility |
+| Layer | Current tools / approach |
 |---|---|
-| **MacBook** | Product design, AI-assisted development, tests, documentation, Git, and review |
-| **GPU workstation** | Finished self-hosted services, local inference, and deployed product workloads |
+| **Development** | Python, Docker, Git, AI-assisted development |
+| **Agent orchestration** | OpenClaw, reusable workflows, tool-enabled agents |
+| **Local inference** | Ollama with Qwen, Gemma, and DeepSeek model families |
+| **Cloud intelligence** | Used selectively when capability justifies the privacy, cost, or latency tradeoff |
+| **Compute** | MacBook for development + dedicated GPU workstation for local inference and deployed services |
 
-The platform currently uses Python, Docker, OpenClaw, Ollama, and local model families including Qwen, Gemma, and DeepSeek. Cloud models are introduced deliberately when a validated use case justifies the privacy, cost, or capability tradeoff.
+The technology will change. The product questions are more durable.
 
 ## What this repository documents
 
-This repository is the public architectural and product source of truth for the Lab. Readers can follow:
+AI Lab is the public source of truth connecting the products, experiments, and decisions across the portfolio:
 
-- the [vision](docs/vision.md) behind the Lab;
-- the [master roadmap](docs/roadmap.md) and current status of each workstream;
-- the [ecosystem architecture](docs/architecture.md) and responsibility boundaries;
-- the [project index](docs/projects/README.md) linking independent prototypes;
-- the [decision index](docs/decisions/README.md) for durable cross-product choices;
-- the [GitHub portfolio strategy](docs/github-portfolio.md);
-- the [standards](docs/repository-standards.md) applied to future product repositories; and
-- the sanitized [project context](PROJECT_CONTEXT.md) used to keep future work consistent.
+- [Vision](docs/vision.md) — the longer-term product thesis
+- [Roadmap](docs/roadmap.md) — active build sequence and status
+- [Architecture](docs/architecture.md) — ecosystem boundaries and request flow
+- [Project index](docs/projects/README.md) — verified projects and repositories
+- [Decision index](docs/decisions/README.md) — durable cross-product decisions
+- [Repository standards](docs/repository-standards.md) — expectations for product repositories
+- [Project context](PROJECT_CONTEXT.md) — sanitized context that keeps future work consistent
 
-This is meant to remain useful when an experiment fails or a decision changes. Successful code is only one kind of evidence; rejected approaches, constraints, and lessons are part of the product story too.
+The documentation is intentionally designed to preserve rejected approaches, constraints, failures, and changes in direction alongside successful code. Those are part of the product evidence too.
 
-## Where the Lab is going
+## Where this is going
 
-The Lab is an ongoing exploration of how AI can improve different facets of life and make everyday work more efficient. I want to understand where AI creates genuine leverage—not only in software, but in how I plan, communicate, learn, create, make decisions, and turn ideas into useful outcomes.
+The long-term goal is to build a body of evidence about how AI-native products should be designed when they need to **understand context, use tools, make decisions, maintain state, take action, and remain accountable to people**.
 
-Each new product will begin with a real need and a clear question about whether AI can make that experience meaningfully better. Some experiments may become standalone products; others may become reusable workflows, shared capabilities, consulting insights, or lessons that shape the next idea.
+Some experiments will become products. Some will remain focused tests. Some will be discarded because the evidence does not support the hypothesis.
 
-The [master roadmap](docs/roadmap.md) tracks the active build sequence without limiting the broader direction of the Lab.
+That is the point of the Lab: **build enough to know, evaluate enough to decide, and document enough to make the reasoning visible.**
