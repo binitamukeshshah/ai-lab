@@ -42,15 +42,19 @@ The full design—including request flow, repository ownership, and deployment p
 
 ## What I am building
 
-| Product | The question it explores | Status |
-|---|---|---|
-| [AI Decision Engine](https://github.com/binitamukeshshah/ai-decision-engine) | Can an AI platform choose the cheapest adequate model while respecting privacy, readiness, quota, and cost? | **Completed v0.1.0** |
-| Forge | Can AI create a more disciplined path from product intent to a working, reviewable artifact? | **Completed prototype** |
-| Telegram AI Assistant | Can Telegram become a secure mobile interface to a modular personal AI platform? | **Current priority** |
-| AI Lab CLI | What lightweight operator experience is useful across the Lab? | **Early exploration** |
-| Future products | How can the platform create value in productivity, content, coordination, and career development? | **Next** |
+The Lab currently centers on three systems that test different layers of the same product problem: **how to make AI useful when it must do more than generate a response.**
 
-Each product has—or will have—its own repository, architecture, tests, evaluation evidence, roadmap, and limitations. Product code does not live here. Verified links and status are maintained in the [project index](docs/projects/README.md).
+| System | Product question | What it demonstrates |
+|---|---|---|
+| [AI Decision Engine](https://github.com/binitamukeshshah/ai-decision-engine) | How should an AI system choose which intelligence to use? | Model selection and routing across privacy, capability, readiness, quota, and cost constraints |
+| [Telegram Assistant](https://github.com/binitamukeshshah/telegram-assistant) | How should an AI system reliably interact with a person and take action? | Agentic interaction, tool use, deterministic state changes, local-first execution, and honest failure handling |
+| [Project OS](https://github.com/binitamukeshshah/project-os) | How should an AI system maintain context and control across ongoing work? | Persistent state, provenance, project context, approval boundaries, and human control |
+
+Together, they explore a progression from **choosing intelligence → acting reliably → maintaining context over time**.
+
+[Forge](https://github.com/binitamukeshshah/forge) is a supporting prototype focused on developer experience: reducing the friction between product intent and a structured, working AI project. Its development is intentionally paused while I prioritize the three systems above.
+
+Each system has an explicit product question, architecture, responsibility boundaries, tests, limitations, and roadmap. As the Lab matures, I am adding stronger evaluation evidence so product decisions can be grounded not only in whether a system works, but **how well it works, where it fails, what it costs, and when a different design is warranted**.
 
 ## How I work
 
