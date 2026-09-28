@@ -1,20 +1,14 @@
 # Binita AI Lab
 
-> **“I believe the future belongs to Product Managers who can turn ideas into working AI prototypes—not by becoming ML engineers, but by understanding AI deeply enough to design, evaluate, and ship products with it.”**
+### **AI Product Leader | Building and evaluating AI-native systems hands-on**
 
-I am an AI Product Manager, and Binita AI Lab is how I am learning to build the kind of products I want to lead.
+I design, build, and evaluate working AI products to understand what it takes to make them useful, reliable, and ready to scale.
 
-The idea began at work. As I started using AI in my day-to-day product practice, I saw more than a faster way to write or research. I saw a fundamental shift in what one person could do: an idea that once required weeks of coordination could become something tangible, testable, and discussable in a fraction of the time.
+This lab is where I test product hypotheses through working systems: how agents use context and tools, how models are selected and orchestrated, how AI maintains state and memory, how actions are verified, and where humans should remain in control.
 
-That changed the question for me. I no longer wanted to learn AI by collecting tools or following tutorials. I wanted to understand what was happening beneath the interface: how models are selected, how context moves through a system, when local intelligence is sufficient, when cloud intelligence is worth the tradeoff, how tools and memory should be governed, and what it takes to make the result reliable enough for a real user.
+Each project moves from **product question → working system → evaluation → failure analysis → product decision**.
 
-So instead of building a workflow around dozens of disconnected AI products, I began building an AI ecosystem I could understand end to end.
-
-Every prototype in this Lab starts with a problem I genuinely have. The AI Decision Engine grew from the need to choose among models without hardcoding one provider. Telegram AI Assistant comes from wanting a secure mobile interface to the wider system. Forge explores how AI can strengthen the path from product intent to a working artifact. Future products will apply the same thinking to productivity, content, career development, and everyday coordination.
-
-The goal is not to present myself as an ML engineer. It is to become a stronger AI Product Manager: someone who can move from opportunity to architecture, from architecture to prototype, and from prototype to evidence—while asking the product questions that determine whether an AI system is useful, trustworthy, affordable, and ready to ship.
-
-Over time, I want this work to create value in several forms: products, reusable workflows, consulting, and content that helps other product leaders understand how AI systems are actually designed. But the first objective is deeper understanding. I want to know what I am building, why each boundary exists, which tradeoffs I accepted, and what the evidence truly proves.
+The goal isn't to build demos. It's to develop evidence about what actually works.
 
 ## What Binita AI Lab is
 
