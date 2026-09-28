@@ -12,14 +12,13 @@ The goal isn't to build demos. It's to develop evidence about what actually work
 
 ## What Binita AI Lab is
 
-Binita AI Lab is a product-led environment for designing and testing useful AI systems. It is both:
+Binita AI Lab is the product and architecture layer for a growing set of AI-native systems I build end to end. Each project starts with a concrete product question and turns it into a working system that can be tested against real constraints.
 
-- a growing ecosystem of focused AI product prototypes; and
-- the engineering notebook behind them—the decisions, experiments, tradeoffs, failures, evidence, and lessons that shape the platform.
+Across the Lab, I explore recurring AI product problems: model selection and orchestration, agent and tool behavior, context and state, privacy and cost, reliability, evaluation, and human control. The projects are intentionally connected so that capabilities and lessons from one system can inform the next.
 
-This is not a showcase of disconnected demos. Each project isolates a real product question, tests a risky assumption, and contributes one understood capability to a longer-term platform vision.
+The Lab documents more than what was built. It captures the **hypotheses, architecture, product decisions, tradeoffs, failure modes, evaluation evidence, and boundaries** behind each system.
 
-That vision is a personal AI ecosystem that can move deliberately between local and cloud intelligence, use approved tools safely, remember with consent, control cost, and meet users in interfaces they already understand.
+The result is not a collection of AI demos. It is a working portfolio of AI product decisions made concrete through software.
 
 ## How the system fits together
 
